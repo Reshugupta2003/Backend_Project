@@ -1,0 +1,2 @@
+PORT = 8000
+MONGODB_URI = mongodb+srv://ag6362807_db_user:Your_Password@cluster0.tt3gscd.mongodb.net
