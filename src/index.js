@@ -1,14 +1,48 @@
-// import mongoose from "mongoose";  used in method 1
+// import mongoose from "mongoose";          used in method 1
 // import {DB_NAME} from "./constants"
 // import express from "express";
 
 
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";  // sometimes we also need to export index.js file, if i write index then it's also wrong .js extension also nessasary
+import {app} from "./app.js";
+
+
 dotenv.config({
     path: "./.env"
 });
-connectDB();
+
+
+connectDB() // connect with DB then start the server.
+.then(() => {
+    app.on((err) => {
+        console.log("Error : ", err);
+    })
+
+    app.listen(process.env.PORT || 8000, () => {   // if server port not work then it use port 8000, this is good practice to use.
+        console.log(`App is listening on port ${process.env.PORT}`);
+    });
+})
+.catch((err) => {
+console.log("MongoDB connection failed : ", err);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
