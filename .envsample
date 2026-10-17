@@ -1,2 +1,16 @@
-PORT = 8000
-MONGODB_URI = mongodb+srv://ag6362807_db_user:Your_Password@cluster0.tt3gscd.mongodb.net
+PORT=8080
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net
+CORS_ORIGIN=http://localhost:3000
+
+#Access token not store in database but Refresh token store in database.
+
+ACCESS_TOKEN_SECRET=<generate-a-long-random-secret>
+ACCESS_TOKEN_EXPIRY=1D;
+REFRESH_TOKEN_SECRET=<generate-another-long-random-secret>
+REFRESH_TOKEN_EXPIRY=10d
+
+# Don't give space, sometimes it will create a problem.
+
+CLOUDINARY_CLOUD_NAME=<cloud-name>
+CLOUDINARY_API_KEY=<api-key>
+CLOUDINARY_API_SECRET=<api-secret>

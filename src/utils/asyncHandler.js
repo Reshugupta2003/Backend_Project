@@ -1,11 +1,11 @@
 // method 1 : using promise
-
-const asyncHandler = (requestHandler) =>
-    (req, res, next) => {
+// wraps an async function and catches any errors that occur during its execution, passing them to the next middleware for error handling.
+const asyncHandler = (requestHandler) => {
+    return (req, res, next) => {
     Promise.resolve(requestHandler(req, res, next))
     .catch((err) => next(err));
+ }
 }
-
 
 export {asyncHandler};
 

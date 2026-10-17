@@ -15,11 +15,11 @@ dotenv.config({
 
 connectDB() // connect with DB then start the server.
 .then(() => {
-    app.on((err) => {
+    app.on("error", (err) => {
         console.log("Error : ", err);
     })
-
-    app.listen(process.env.PORT || 8000, () => {   // if server port not work then it use port 8000, this is good practice to use.
+  
+    app.listen(process.env.PORT || 8080, () => {   // if server port not work then it use port 8000, this is good practice to use.
         console.log(`App is listening on port ${process.env.PORT}`);
     });
 })

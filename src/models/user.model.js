@@ -57,9 +57,9 @@ const userSchema = new Schema({
     2. use async because encryption is time taking process.
   */
  userSchema.pre("save", async function(next){
-    if(!this.password.isModified("password")) return next();
+    if(!this.isModified("password")) return next();
 
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
     next();
  })
 
@@ -67,7 +67,7 @@ const userSchema = new Schema({
    return await bcrypt.compare(password, this.password)
  };
  userSchema.methods.generateAccessToken = function(){
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
       email: this.email,
@@ -81,11 +81,11 @@ const userSchema = new Schema({
   )
  };
  userSchema.methods.generateRefreshToken = function(){
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
     },
-    process.env.ACCESS_TOKEN_SECRET,
+    process.env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY
     }
