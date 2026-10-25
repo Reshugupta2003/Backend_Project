@@ -27,7 +27,7 @@ const userSchema = new Schema({
     trim : true,
     },
 
-    avtar : {
+    avatar : {
         type :String,  //cloudinary url of uploaded avtar
         required : true, 
     },
@@ -56,17 +56,18 @@ const userSchema = new Schema({
     1. use function instead arrow function because arrow function doesn't have their own this binding.
     2. use async because encryption is time taking process.
   */
- userSchema.pre("save", async function(next){
-    if(!this.isModified("password")) return next();
+   userSchema.pre("save", async function(){
+    if(!this.isModified("password")) return;
 
     this.password = await bcrypt.hash(this.password, 10);
-    next();
+
  })
 
  userSchema.methods.isPasswordCorrect = async function(password){
    return await bcrypt.compare(password, this.password)
  };
  userSchema.methods.generateAccessToken = function(){
+ 
   return jwt.sign(
     {
       _id: this._id,

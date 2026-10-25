@@ -12,7 +12,7 @@ app.use(cors({
 app.use(express.json({limit: "16kb"}));
 app.use(express.urlencoded({extended: true, limit: "16kb"}));
 app.use(express.static("public"));
-app.use(cookieParser());
+app.use(cookieParser());    // this is help to use cookies in user.controller.js file
 
 //import routes
 import userRouter from "./routes/user.route.js"; // we give any (like - userRoute,routes, etc) only if export is default
